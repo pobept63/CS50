@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+//A comment to test git, remove me
 
 int hash(const char *word);
 
