@@ -15,7 +15,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-//A comment to test git, remove me
 
 int hash(const char *word);
 
@@ -61,7 +60,7 @@ check(const char *word)
 
 
   while( nodep ) {
-    if (!strcmp(word,nodep->word)) {
+    if (!strcmp(word,temp_word)) {
 	return true;
     }
     nodep = nodep->next;
@@ -103,7 +102,7 @@ load(const char *dictionary)
     
     hv = hash(word);
 
-    printf( "%s hash = %d\n",word,hv);   
+    //    printf( "%s hash = %d\n",word,hv);   
     word_count ++;
     if(hasht[hv] == NULL) { // Insert as head of list
 	hasht[hv] = nodep;
@@ -145,21 +144,21 @@ bool
 unload(void)
 {
 
+  node *nextnodep,*nodep;
   // Walk hash table deleting nodes
   // Note need to delete both the node and the word pointed in the node.
   for (int i = 0; i<HT_SIZE; i++) {
       nodep = hasht[i];
       while (nodep) {
+	free(nodep->word);
 	nextnodep  = nodep->next;
 	free(nodep);
 	nodep = nextnodep;
+      }
        
     hasht[i] = NULL;
   }
-
-
-    // TODO
-    return false;
+  return true;
 }
 
 
